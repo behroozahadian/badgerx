@@ -1,12 +1,13 @@
-#badgerx
+# badgerx
 
 Badgerx is a simple wrapper over [BadgerDB](https://github.com/dgraph-io/badger). BadgerDB is an embeddable, persistent 
 and fast key-value (KV) database written in pure Go. It is the underlying database for Dgraph, a fast, distributed graph 
 database. It's meant to be a performant alternative to non-Go-based key-value stores like RocksDB. 
-It becomes handy for those android or ios developers who want to use such database, here Badgerx among with [gomobile](https://github.com/golang/mobile)
-can help developers to access some BadgerDB key Operators(Set,Get,Delete,Transactions...). 
 
-####Usage
+It becomes handy for those android or ios developers who want to use such database, here Badgerx among with [gomobile](https://github.com/golang/mobile)
+can help developers to access some BadgerDB key operators(Set,Get,Delete,Transactions...). 
+
+#### Usage
 ```go
 import (
 	"fmt"
