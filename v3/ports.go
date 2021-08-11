@@ -6,6 +6,7 @@ type Badgerx interface {
 	Delete(key []byte) error
 	ExpiresAt(key []byte) (expiresAt uint64, err error)
 	Close() error
+	NewTransaction(update bool) Txn
 }
 
 type Txn interface {
