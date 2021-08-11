@@ -23,14 +23,14 @@ func main() {
 
 	defer badger.Close()
 
-    // set data, here transactions are implemented under the hood
+        // set data, here transactions are implemented under the hood
 	err = badger.Set([]byte("hello"), []byte("world"), 0)
 	if err != nil {
 		log.Println(err.Error())
 		return
 	}
 
-    // get data
+        // get data
 	v, err := badger.Get([]byte("hello"))
 	if err != nil {
 		log.Println(err.Error())
@@ -38,7 +38,7 @@ func main() {
 	}
 	fmt.Printf("get hello %s\n", string(v))
 
-    // delete
+        // delete
 	err = badger.Delete([]byte("hello"))
 	if err != nil {
 		log.Println(err.Error())
