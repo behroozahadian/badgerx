@@ -1,9 +1,10 @@
 package v3
 
 import (
+	"time"
+
 	"github.com/dgraph-io/badger/v3"
 	"github.com/pkg/errors"
-	"time"
 )
 
 type badgerx struct {
@@ -22,12 +23,13 @@ func Open(path string, inMemory bool) (badgerDb Badgerx, err error) {
 		opt = badger.DefaultOptions(path)
 	}
 
-	//Badger obtains a lock on the directories so multiple processes cannot open the same database at the same time
-	if db, err := badger.Open(opt); err != nil {
+	// Badger obtains a lock on the directories so multiple processes cannot open the same database at the same time
+	db, err := badger.Open(opt)
+	if err != nil {
 		return
-	} else {
-		b.db = db
 	}
+
+	b.db = db
 
 	return b, nil
 }

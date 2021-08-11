@@ -1,12 +1,13 @@
 package v3
 
 import (
-	badger "github.com/dgraph-io/badger/v3"
 	"time"
+
+	badger "github.com/dgraph-io/badger/v3"
 )
 
 type transaction struct {
-	db *badger.DB
+	db  *badger.DB
 	txn *badger.Txn
 }
 
@@ -26,7 +27,7 @@ func (t *transaction) Set(key, value []byte, ttl int64) error {
 //
 // This function is useful in long running iterate/update transactions to avoid a write deadlock.
 // See Github issue: https://github.com/dgraph-io/badger/issues/315
-func (t *transaction) Get(key[]byte) (value []byte, err error) {
+func (t *transaction) Get(key []byte) (value []byte, err error) {
 	item, err := t.txn.Get(key)
 	if err != nil {
 		return nil, err
@@ -37,7 +38,7 @@ func (t *transaction) Get(key[]byte) (value []byte, err error) {
 
 // ExpiresAt returns a Unix time value indicating when the item will be
 // considered expired. 0 indicates that the item will never expire.
-func (t *transaction) ExpiresAt(key[]byte) (expiresAt uint64, err error) {
+func (t *transaction) ExpiresAt(key []byte) (expiresAt uint64, err error) {
 	item, err := t.txn.Get(key)
 	if err != nil {
 		return
@@ -54,7 +55,7 @@ func (t *transaction) ExpiresAt(key[]byte) (expiresAt uint64, err error) {
 //
 // The current transaction keeps a reference to the key byte slice argument.
 // Users must not modify the key until the end of the transaction.
-func (t *transaction) Delete(key[]byte) error {
+func (t *transaction) Delete(key []byte) error {
 	err := t.txn.Delete(key)
 	if err != nil {
 		return err
@@ -84,7 +85,6 @@ func (t *transaction) Delete(key[]byte) error {
 func (t *transaction) Commit() error {
 	return t.txn.Commit()
 }
-
 
 // Discard discards a created transaction. This method is very important and must be called. Commit
 // method calls this internally, however, calling this multiple times doesn't cause any issues. So,
